@@ -5,6 +5,11 @@
     border-color: #3b3b3b !important;
     color: white;
 }
+
+.DarkTheme::placeholder{
+    color: #9ca3af !important;
+}
+
 .DarkThemeBtn{
     background-color: #4DA6FF;
     transition: 0.5s;
@@ -16,9 +21,13 @@
 }
 
 .DarkThemeTexts{
-    color: #F9F9F9;
+    color: #9ca3af !important;
 }
 
-.DarkThemeTitle{
-    color: #4DA6FF;
+.DarkThemeTextBlue{
+    color: #4DA6FF !important;
+}
+
+.DarkThemeBorder{
+    border-color: #3b3b3b !important;
 }
