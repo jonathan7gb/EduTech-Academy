@@ -1,17 +1,24 @@
+
+.DarkTheme{
+    background-color: #1E1E1E !important;
+    border: 1px solid;
+    border-color: #3b3b3b !important;
+    color: white;
+}
 .DarkThemeBtn{
     background-color: #4DA6FF;
     transition: 0.5s;
+    color: #1E1E1E !important;
 }
 
 .DarkThemeBtn:hover{
     background-color: #66BFFF;
 }
 
-.DarkTheme{
-    background-color: #1E1E1E;
-    color: white;
-}
-
 .DarkThemeTexts{
     color: #F9F9F9;
+}
+
+.DarkThemeTitle{
+    color: #4DA6FF;
 }
