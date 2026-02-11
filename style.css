@@ -1,0 +1,17 @@
+.DarkThemeBtn{
+    background-color: #4DA6FF;
+    transition: 0.5s;
+}
+
+.DarkThemeBtn:hover{
+    background-color: #66BFFF;
+}
+
+.DarkTheme{
+    background-color: #1E1E1E;
+    color: white;
+}
+
+.DarkThemeTexts{
+    color: #F9F9F9;
+}
