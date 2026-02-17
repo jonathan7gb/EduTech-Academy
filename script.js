@@ -141,7 +141,7 @@ function limpa_formulário_cep() {
     estado.value = ("");
 }
 
-function meu_callback(conteudo) {
+function callbackCEP(conteudo) {
     if (!("erro" in conteudo)) {
         rua.value = (conteudo.logradouro);
         bairro.value = (conteudo.bairro);
@@ -156,7 +156,6 @@ function meu_callback(conteudo) {
 
 function pesquisacep(valor) {
 
-        //Nova variável "cep" somente com dígitos.
         var cep = valor.replace(/\D/g, '');
 
         if (cep != "") {
@@ -172,7 +171,7 @@ function pesquisacep(valor) {
 
                 var script = document.createElement('script');
 
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=callbackCEP';
 
                 document.body.appendChild(script);
 
