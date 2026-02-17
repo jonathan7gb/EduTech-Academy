@@ -76,7 +76,7 @@ btnTrocarTema.addEventListener('click', () => {
     }
 })
 
-// CONSULTAR CEP NA API VIA CEP E RETORNAR OS DADOS
+// VALIDAR CAMPOS NO FORMULÁRIO
 
 const nome = document.getElementById("nome")
 const email = document.getElementById("email")
@@ -99,22 +99,28 @@ const errobairro = document.getElementById("errobairro")
 const errocidade = document.getElementById("errocidade")
 const erroestado = document.getElementById("erroestado")
 const formMatricula = document.getElementById("formMatricula")
+const camposValidar = [
+    { campo: nome, erro: erronome, msg: "Preencha o nome." },
+    { campo: email, erro: erroemail, msg: "Informe um e-mail válido." },
+    { campo: telefone, erro: errotelefone, msg: "Informe o número de telefone." },
+    { campo: cpf, erro: errocpf, msg: "Informe o CPF corretamente." },
+    { campo: curso, erro: errocurso, msg: "Selecione um curso." },
+    { campo: cep, erro: errocep, msg: "Informe o CEP corretamente." },
+    { campo: rua, erro: errorua, msg: "Informe a rua." },
+    { campo: bairro, erro: errobairro, msg: "Informe o bairro." },
+    { campo: cidade, erro: errocidade, msg: "Informe a cidade." },
+    { campo: estado, erro: erroestado, msg: "Informe o estado." }
+]
 
 formMatricula.addEventListener("submit", (e) => {
 
     let valido = true
 
-    if (!validarCampo(nome, erronome, "Preencha o nome.")) valido = false
-    if (!validarCampo(email, erroemail, "Informe um e-mail válido.")) valido = false
-    if (!validarCampo(telefone, errotelefone, "Informe o número de telefone.")) valido = false
-    if (!validarCampo(cpf, errocpf, "Informe o CPF corretamente.")) valido = false
-    if (!validarCampo(curso, errocurso, "Selecione um curso.")) valido = false
-    if (!validarCampo(cep, errocep, "Informe o CEP corretamente.")) valido = false
-    if (!validarCampo(rua, errorua, "Informe a rua.")) valido = false
-    if (!validarCampo(bairro, errobairro, "Informe o bairro.")) valido = false
-    if (!validarCampo(cidade, errocidade, "Informe a cidade.")) valido = false
-    if (!validarCampo(estado, erroestado, "Informe o estado.")) valido = false
-
+    camposValidar.forEach(campo => {
+        if (!validarCampo(campo.campo, campo.erro, campo.msg)) {
+            valido = false
+        }
+    })
 
     if (!valido) {
         e.preventDefault()
@@ -134,6 +140,14 @@ function validarCampo(campo, erroElemento, mensagem) {
     }
 }
 
+
+// CONSULTAR CEP NA API VIA CEP E RETORNAR OS DADOS
+
+function retornarUrlCep(cep) {
+    return `https://viacep.com.br/ws/${cep}/json/`
+}
+
+
 function limpa_formulário_cep() {
     rua.value = ("");
     bairro.value = ("");
@@ -141,47 +155,35 @@ function limpa_formulário_cep() {
     estado.value = ("");
 }
 
-function callbackCEP(conteudo) {
-    if (!("erro" in conteudo)) {
-        rua.value = (conteudo.logradouro);
-        bairro.value = (conteudo.bairro);
-        cidade.value = (conteudo.localidade);
-        estado.value = (conteudo.uf);
-    } 
-    else {
-        limpa_formulário_cep();
-        alert("CEP não encontrado.");
-    }
-}
 
 function pesquisacep(valor) {
 
-        var cep = valor.replace(/\D/g, '');
+    var cep = valor.replace(/\D/g, '');
 
-        if (cep != "") {
+    if (cep !== "" && /^[0-9]{8}$/.test(cep)) {
 
-            var validacep = /^[0-9]{8}$/;
+        rua.value = "Buscando dados..."
+        bairro.value = "Buscando dados..."
+        cidade.value = "Buscando dados..."
+        estado.value = "Buscando dados..."
 
-            if(validacep.test(cep)) {
 
-              rua.value="...";
-              bairro.value="...";
-              cidade.value="...";
-              estado.value="...";
+        fetch(retornarUrlCep(cep))
+            .then(res => res.json())
+            .then(dados => {
+                if (!dados.erro) {
+                    rua.value = (dados.logradouro);
+                    bairro.value = (dados.bairro);
+                    cidade.value = (dados.localidade);
+                    estado.value = (dados.uf);
+                }else{
+                    limpa_formulário_cep()
+                    errocep.innerText = "CEP não encontrado."
+                }
+            })
 
-                var script = document.createElement('script');
-
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=callbackCEP';
-
-                document.body.appendChild(script);
-
-            }
-            else {
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        }
-        else {
-            limpa_formulário_cep();
-        }
-    };
+    } else {
+        limpa_formulário_cep();
+        errocep.innerText = "Formato de CEP inválido."
+    }
+};
