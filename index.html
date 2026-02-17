@@ -150,7 +150,7 @@
                 <div class="border p-4 mt-4 w-full rounded-md borderColorGray">
                     <h3 class="text-lg font-semibold font-poppins">Formulário de Matrícula</h3>
 
-                    <form action="" class="mt-4" id="formMatricula">
+                    <form action="" class="mt-4" method="get" id="formMatricula">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             <div class="flex flex-col gap-1">    
                                 <label for="nome" class="text-sm">Nome Completo *</label>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="flex flex-col gap-1">    
                                 <label for="cep" class="text-sm">CEP *</label>
-                                <input  type="text" id="cep" placeholder="00000-000" class="p-2 2 border inputs rounded-md placeholder:text-sm">
+                                <input  type="text" id="cep" placeholder="00000-000" class="p-2 2 border inputs rounded-md placeholder:text-sm" value="" onblur="pesquisacep(this.value);">
                                 <p id="errocep" class="text-red-500 text-sm font-medium mt-1"></p>
                             </div>
                             <div class="flex flex-col gap-1">    

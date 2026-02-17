@@ -7,7 +7,7 @@ const inputs = document.querySelectorAll(".inputs")
 const borderColorGray = document.querySelectorAll(".borderColorGray")
 const body = document.body
 
-if(localStorage.getItem("Theme") == "Dark"){
+if (localStorage.getItem("Theme") == "Dark") {
     btnTrocarTema.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>'
     body.classList.add('DarkTheme')
     logo.classList.add('DarkThemeTextBlue')
@@ -26,8 +26,8 @@ if(localStorage.getItem("Theme") == "Dark"){
     borderColorGray.forEach(divs => {
         divs.classList.add('DarkThemeBorder')
     })
-}else if(localStorage.getItem("Theme") == "Light"){
-     btnTrocarTema.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>'
+} else if (localStorage.getItem("Theme") == "Light") {
+    btnTrocarTema.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>'
     body.classList.remove('DarkTheme')
     logo.classList.remove('DarkThemeTextBlue')
     cardsCouse.forEach(card => {
@@ -66,11 +66,11 @@ btnTrocarTema.addEventListener('click', () => {
     borderColorGray.forEach(divs => {
         divs.classList.toggle('DarkThemeBorder')
     })
-    
-    if(body.classList.contains("DarkTheme")){
+
+    if (body.classList.contains("DarkTheme")) {
         localStorage.setItem("Theme", "Dark")
         btnTrocarTema.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>'
-    }else{
+    } else {
         localStorage.setItem("Theme", "Light")
         btnTrocarTema.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>'
     }
@@ -98,33 +98,32 @@ const errorua = document.getElementById("errorua")
 const errobairro = document.getElementById("errobairro")
 const errocidade = document.getElementById("errocidade")
 const erroestado = document.getElementById("erroestado")
-const urlApiViaCep = `viacep.com.br/ws/${cep}/json/`
 const formMatricula = document.getElementById("formMatricula")
 
 formMatricula.addEventListener("submit", (e) => {
-    
+
     let valido = true
 
-    if(!validarCampo(nome, erronome, "Preencha o nome.")) valido = false
-    if(!validarCampo(email, erroemail, "Informe um e-mail válido.")) valido = false
-    if(!validarCampo(telefone, errotelefone, "Informe o número de telefone.")) valido = false
-    if(!validarCampo(cpf, errocpf, "Informe o CPF corretamente.")) valido = false
-    if(!validarCampo(curso, errocurso, "Selecione um curso.")) valido = false
-    if(!validarCampo(cep, errocep, "Informe o CEP corretamente.")) valido = false
-    if(!validarCampo(rua, errorua, "Informe a rua.")) valido = false
-    if(!validarCampo(bairro, errobairro, "Informe o bairro.")) valido = false
-    if(!validarCampo(cidade, errocidade,"Informe a cidade." )) valido = false
-    if(!validarCampo(estado, erroestado, "Informe o estado.")) valido = false
+    if (!validarCampo(nome, erronome, "Preencha o nome.")) valido = false
+    if (!validarCampo(email, erroemail, "Informe um e-mail válido.")) valido = false
+    if (!validarCampo(telefone, errotelefone, "Informe o número de telefone.")) valido = false
+    if (!validarCampo(cpf, errocpf, "Informe o CPF corretamente.")) valido = false
+    if (!validarCampo(curso, errocurso, "Selecione um curso.")) valido = false
+    if (!validarCampo(cep, errocep, "Informe o CEP corretamente.")) valido = false
+    if (!validarCampo(rua, errorua, "Informe a rua.")) valido = false
+    if (!validarCampo(bairro, errobairro, "Informe o bairro.")) valido = false
+    if (!validarCampo(cidade, errocidade, "Informe a cidade.")) valido = false
+    if (!validarCampo(estado, erroestado, "Informe o estado.")) valido = false
 
 
-    if(!valido){
+    if (!valido) {
         e.preventDefault()
     }
 
 })
 
 function validarCampo(campo, erroElemento, mensagem) {
-    if(campo.value.trim() === ""){
+    if (campo.value.trim() === "") {
         erroElemento.innerText = mensagem
         campo.classList.add("border-red-500")
         return false
@@ -134,3 +133,56 @@ function validarCampo(campo, erroElemento, mensagem) {
         return true
     }
 }
+
+function limpa_formulário_cep() {
+    rua.value = ("");
+    bairro.value = ("");
+    cidade.value = ("");
+    estado.value = ("");
+}
+
+function meu_callback(conteudo) {
+    if (!("erro" in conteudo)) {
+        rua.value = (conteudo.logradouro);
+        bairro.value = (conteudo.bairro);
+        cidade.value = (conteudo.localidade);
+        estado.value = (conteudo.uf);
+    } 
+    else {
+        limpa_formulário_cep();
+        alert("CEP não encontrado.");
+    }
+}
+
+function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        if (cep != "") {
+
+            var validacep = /^[0-9]{8}$/;
+
+            if(validacep.test(cep)) {
+
+              rua.value="...";
+              bairro.value="...";
+              cidade.value="...";
+              estado.value="...";
+
+                var script = document.createElement('script');
+
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                document.body.appendChild(script);
+
+            }
+            else {
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        }
+        else {
+            limpa_formulário_cep();
+        }
+    };
