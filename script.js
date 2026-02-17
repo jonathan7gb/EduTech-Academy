@@ -103,55 +103,34 @@ const formMatricula = document.getElementById("formMatricula")
 
 formMatricula.addEventListener("submit", (e) => {
     
-    if(nome.value.trim() === ""){
-        erronome.innerText = "Por favor, preencha o nome completo."
-        nome.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(email.value.trim() === ""){
-        erroemail.innerText = "Informe um e-mail válido."
-        email.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(telefone.value.trim() === ""){
-        errotelefone.innerText = "Informe o número de telefone."
-        telefone.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(cpf.value.trim() === ""){
-        errocpf.innerText = "Informe o CPF corretamente."
-        cpf.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(curso.value.trim() === ""){
-        errocurso.innerText = "Selecione um curso."
-        curso.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(cep.value.trim() === ""){
-        errocep.innerText = "Informe o CEP corretamente."
-        cep.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(rua.value.trim() === ""){
-        errorua.innerText = "Informe o CEP corretamente."
-        rua.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(bairro.value.trim() === ""){
-        errobairro.innerText = "Informe o CEP corretamente."
-        bairro.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(cidade.value.trim() === ""){
-        errocidade.innerText = "Informe o CEP corretamente."
-        cidade.classList.add("border-red-500")
-        e.preventDefault()
-    }
-    if(estado.value.trim() === ""){
-        erroestado.innerText = "Informe o CEP corretamente."
-        estado.classList.add("border-red-500")
+    let valido = true
+
+    if(!validarCampo(nome, erronome, "Preencha o nome.")) valido = false
+    if(!validarCampo(email, erroemail, "Informe um e-mail válido.")) valido = false
+    if(!validarCampo(telefone, errotelefone, "Informe o número de telefone.")) valido = false
+    if(!validarCampo(cpf, errocpf, "Informe o CPF corretamente.")) valido = false
+    if(!validarCampo(curso, errocurso, "Selecione um curso.")) valido = false
+    if(!validarCampo(cep, errocep, "Informe o CEP corretamente.")) valido = false
+    if(!validarCampo(rua, errorua, "Informe a rua.")) valido = false
+    if(!validarCampo(bairro, errobairro, "Informe o bairro.")) valido = false
+    if(!validarCampo(cidade, errocidade,"Informe a cidade." )) valido = false
+    if(!validarCampo(estado, erroestado, "Informe o estado.")) valido = false
+
+
+    if(!valido){
         e.preventDefault()
     }
 
 })
+
+function validarCampo(campo, erroElemento, mensagem) {
+    if(campo.value.trim() === ""){
+        erroElemento.innerText = mensagem
+        campo.classList.add("border-red-500")
+        return false
+    } else {
+        erroElemento.innerText = ""
+        campo.classList.remove("border-red-500")
+        return true
+    }
+}
